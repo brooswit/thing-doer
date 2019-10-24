@@ -77,8 +77,8 @@ ldClient.on('ready', () => {
             stdout(`(sys) starting "${variation}"\n`);
 
             things[flag] = childProcess.exec(path);
-            // things[flag].stdout.on('data', stdout);
-            // things[flag].stderr.on('data', stderr);
+            things[flag].stdout.on('data', stdout);
+            things[flag].stderr.on('data', stderr);
 
             const interval = ldClient.variation(`${flag}-interval`, null);
             if(typeof interval === "number" && interval > 0) {
