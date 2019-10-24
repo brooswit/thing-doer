@@ -32,7 +32,7 @@ function getUser() {
 }
 
 
-const ldClient = LaunchDarkly.initialize(LD_SDK_KEY, getUser());
+const ldClient = LaunchDarkly.initialize(LD_CLIENTSIDE_ID, getUser());
 console.log(currentuser);
 
 let things = {};
