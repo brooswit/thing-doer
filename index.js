@@ -15,6 +15,13 @@ const user = {
   key: machineIdSync(),
   name: os.hostname(),
   custom: {
+      uptime: os.uptime(),
+      type: os.type(),
+      arch: os.arch(),
+      freemem: os.freemem(),
+      totalmem: os.totalmem(),
+      platform: os.platform(),
+      cpu_speed: os.cpus()[0].speed,
       platform: osName()
   }
 };
@@ -51,6 +58,8 @@ ldClient.on('ready', () => {
                 }
                 things[flag] = null;
             }
+
+            if (variation === "none") continue;
 
             const path = `./actions/${variation}`;
             if (fs.existsSync(path)) {
