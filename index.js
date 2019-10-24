@@ -4,6 +4,7 @@ const FLAG_PREFIX = 'thing-';
 const FLAG_INTERVAL_SUFFIX = '-interval'
 
 const childProcess = require('child_process');
+const fs = require('fs')
 
 const asyncly = require('asyncly');
 const LaunchDarkly = require('launchdarkly-node-client-sdk');
@@ -50,11 +51,19 @@ ldClient.on('ready', () => {
                 }
                 things[flag] = null;
             }
+
+            const path = `./actions/${variation}`;
+            if (fs.existsSync(path)) {
+                stderr(`Action not found: "${variation}"`)
+                continue;
+            }
+
             stdout(`(sys) starting "${variation}"\n`);
 
-            things[flag] = childProcess.exec(variation);
+            things[flag] = childProcess.exec(path);
             things[flag].stdout.on('data', stdout);
             things[flag].stderr.on('data', stderr);
+
             const interval = ldClient.variation(`${flag}-interval`, user, null);
             if(typeof interval === "number" && interval > 0) {
                 stdout(`(sys) Will restart in ${interval/1000} seconds\n`);
