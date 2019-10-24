@@ -1,0 +1,26 @@
+{
+  "name": "thing-doer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "asyncly": "git+https://github.com/brooswit/asyncly.git",
+    "launchdarkly-node-client-sdk": "^1.1.0",
+    "node-machine-id": "^1.1.12",
+    "os-name": "^3.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brooswit/thing-doer.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/brooswit/thing-doer/issues"
+  },
+  "homepage": "https://github.com/brooswit/thing-doer#readme"
+}
