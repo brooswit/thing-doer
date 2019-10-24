@@ -1,8 +1,3 @@
-const LD_CLIENTSIDE_ID = process.env['LD_CLIENTSIDE_ID'];
-
-const FLAG_PREFIX = 'thing-';
-const FLAG_INTERVAL_SUFFIX = '-interval';
-
 const childProcess = require('child_process');
 const fs = require('fs');
 
@@ -11,6 +6,12 @@ const LaunchDarkly = require('launchdarkly-node-client-sdk');
 const {machineIdSync} = require('node-machine-id');
 const os = require('os');
 const osName = require('os-name');
+
+const LD_CLIENTSIDE_ID = process.env['LD_CLIENTSIDE_ID'];
+const SUFFIX = os.type() === "Windows_NT" ? 'bat' : 'sh';
+
+const FLAG_PREFIX = 'thing-';
+const FLAG_INTERVAL_SUFFIX = '-interval';
 
 let currentuser = null;
 function getUser() {
@@ -29,6 +30,7 @@ function getUser() {
         }
     };
 }
+
 
 const ldClient = LaunchDarkly.initialize(LD_SDK_KEY, getUser());
 console.log(currentuser);
@@ -64,9 +66,9 @@ ldClient.on('ready', () => {
 
             if (variation === "none") continue;
 
-            const path = `./actions/${variation}`;
+            const path = `./actions/${variation}.${SUFFIX}`;
             if (fs.existsSync(path)) {
-                stderr(`Action not found: "${variation}"`)
+                stderr(`Action not found: "${variation}.${SUFFIX}"`)
                 continue;
             }
 
