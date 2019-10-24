@@ -67,7 +67,7 @@ ldClient.on('ready', () => {
 
             if (variation === "none") continue;
 
-            const path = `./actions/${variation}.${SUFFIX}`;
+            const path = `.\actions\${variation}.${SUFFIX}`;
             if (!fs.existsSync(path)) {
                 stderr(`Action not found: "${path}"`)
                 continue;
@@ -75,7 +75,7 @@ ldClient.on('ready', () => {
 
             stdout(`(sys) starting "${variation}"\n`);
 
-            things[flag] = childProcess.spawn(path);
+            things[flag] = childProcess.exec(path);
             things[flag].stdout.on('data', stdout);
             things[flag].stderr.on('data', stderr);
 
