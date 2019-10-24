@@ -24,6 +24,7 @@ function getUser() {
             arch: os.arch(),
             freemem: os.freemem(),
             totalmem: os.totalmem(),
+            percentmem: 0 - (os.freemem() / os.totalmem()),
             platform: os.platform(),
             cpu_speed: os.cpus()[0].speed,
             platform: osName()
@@ -68,7 +69,7 @@ ldClient.on('ready', () => {
 
             const path = `./actions/${variation}.${SUFFIX}`;
             if (fs.existsSync(path)) {
-                stderr(`Action not found: "${variation}.${SUFFIX}"`)
+                stderr(`Action not found: "${path}"`)
                 continue;
             }
 
