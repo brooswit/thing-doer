@@ -9,7 +9,6 @@ const osName = require('os-name');
 
 const LD_CLIENTSIDE_ID = process.env['LD_CLIENTSIDE_ID'];
 const SUFFIX = os.type() === "Windows_NT" ? 'bat' : 'sh';
-const SLASH = os.type() === "Windows_NT" ? '\\' : '/';
 
 const FLAG_PREFIX = 'thing-';
 const FLAG_INTERVAL_SUFFIX = '-interval';
@@ -68,8 +67,8 @@ ldClient.on('ready', () => {
 
             if (variation === "none") continue;
 
-            const path = `actions${SLASH}${variation}.${SUFFIX}`;
-            if (fs.existsSync(path)) {
+            const path = `actions/${variation}.${SUFFIX}`;
+            if (!fs.existsSync(path)) {
                 stderr(`Action not found: "${path}"`)
                 continue;
             }
