@@ -7,7 +7,7 @@
     "asyncly": "git+https://github.com/brooswit/asyncly.git",
     "launchdarkly-node-client-sdk": "^1.1.0",
     "node-machine-id": "^1.1.12",
-    "os-name": "^3.1.0"
+    "os-name": "^5.1.0"
   },
   "devDependencies": {},
   "scripts": {
